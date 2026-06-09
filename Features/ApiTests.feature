@@ -21,4 +21,4 @@ Feature: REST API Tests
   @negative
   Scenario: Get non-existent post
     When I send a GET request to "/posts/99999"
-    Then the response status code should be 200
+    Then the response status code should be 404

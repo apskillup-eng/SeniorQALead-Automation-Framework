@@ -22,7 +22,7 @@ public static class DriverManager
             "Driver not initialized. Call SetDriver() in BeforeScenario hook.");
 
     /// <summary>
-    /// Quits the WebDriver and disposes ThreadLocal storage.
+    /// Quits the WebDriver and clears ThreadLocal storage.
     /// </summary>
     public static void QuitDriver()
     {
@@ -32,7 +32,7 @@ public static class DriverManager
         }
         finally
         {
-            DriverThreadLocal.Dispose();
+            DriverThreadLocal.Value = null;
         }
     }
 }

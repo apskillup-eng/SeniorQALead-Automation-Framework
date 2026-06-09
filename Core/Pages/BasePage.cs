@@ -25,7 +25,7 @@ public class BasePage
     /// </summary>
     public virtual void WaitForElement(By locator)
     {
-        Wait.Until(ExpectedConditions.PresenceOfElementLocated(locator));
+        Wait.Until(driver => driver.FindElement(locator) != null);
     }
 
     /// <summary>
@@ -33,7 +33,20 @@ public class BasePage
     /// </summary>
     public virtual void Click(By locator)
     {
-        Wait.Until(ExpectedConditions.ElementToBeClickable(locator)).Click();
+        var element = Wait.Until(driver => {
+            try
+            {
+                var elem = driver.FindElement(locator);
+                if (elem.Displayed && elem.Enabled)
+                    return elem;
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        });
+        element?.Click();
     }
 
     /// <summary>
@@ -41,9 +54,21 @@ public class BasePage
     /// </summary>
     public virtual void Type(By locator, string text)
     {
-        var element = Wait.Until(ExpectedConditions.PresenceOfElementLocated(locator));
-        element.Clear();
-        element.SendKeys(text);
+        var element = Wait.Until(driver => {
+            try
+            {
+                return driver.FindElement(locator);
+            }
+            catch
+            {
+                return null;
+            }
+        });
+        if (element != null)
+        {
+            element.Clear();
+            element.SendKeys(text);
+        }
     }
 
     /// <summary>

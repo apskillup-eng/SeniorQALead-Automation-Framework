@@ -61,8 +61,8 @@ public class ApiClient
     {
         var response = await GetAsync(endpoint);
         return response.IsSuccessful 
-            ? JsonConvert.DeserializeObject<T>(response.Content ?? "{}") 
-            : null;
+            ? JsonConvert.DeserializeObject<T>(response.Content ?? "{}")
+            : default(T);
     }
 
     /// <summary>
@@ -72,7 +72,7 @@ public class ApiClient
     {
         var response = await PostAsync(endpoint, body);
         return response.IsSuccessful 
-            ? JsonConvert.DeserializeObject<T>(response.Content ?? "{}") 
-            : null;
+            ? JsonConvert.DeserializeObject<T>(response.Content ?? "{}")
+            : default(T);
     }
 }

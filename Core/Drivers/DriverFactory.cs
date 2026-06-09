@@ -31,15 +31,14 @@ public class DriverFactory
     /// </summary>
     private static IWebDriver CreateChromeDriver(bool headless)
     {
-        new DriverManager().SetUpDriver(new ChromeConfig());
         var options = new ChromeOptions();
-        
+
         if (headless)
             options.AddArgument("--headless=new");
-        
+
         options.AddArgument("--no-sandbox");
         options.AddArgument("--disable-dev-shm-usage");
-        
+
         return new ChromeDriver(options);
     }
 
@@ -48,12 +47,11 @@ public class DriverFactory
     /// </summary>
     private static IWebDriver CreateFirefoxDriver(bool headless)
     {
-        new DriverManager().SetUpDriver(new FirefoxConfig());
         var options = new FirefoxOptions();
-        
+
         if (headless)
             options.AddArgument("--headless");
-        
+
         return new FirefoxDriver(options);
     }
 }

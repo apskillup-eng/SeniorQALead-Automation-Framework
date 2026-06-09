@@ -1,0 +1,13 @@
+bin/
+obj/
+.vs/
+*.user
+*.trx
+Reports/
+Logs/
+allure-results/
+.vscode/
+.DS_Store
+*.log
+.env
+node_modules/
